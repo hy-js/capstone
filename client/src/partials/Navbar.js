@@ -35,7 +35,7 @@ const Navbar = () => {
               <span className='hidden sm:inline'>Profile</span>
           </li>
             </NavLink>
-          <NavLink exact activeClassName="bg-highlight" to='/#how'>
+          <NavLink exact activeClassName="bg-highlight" to='/help'>
           <li className='py-2 hover:bg-highlight border-b-2'>
               <span className='w-7 sm:mx-2 mx-4 inline'>?</span>
               <span className='hidden sm:inline'>Help</span>

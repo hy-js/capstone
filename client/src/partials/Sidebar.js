@@ -9,7 +9,7 @@ export default function Sidebar() {
   const { data: profile, loading, error } = useFetch('http://localhost:5000/profile/me');
 
   if(error) console.log(error)
-  if (!profile) return null;
+  if (!profile) return <h1>Sidebar</h1>
 
   const me = <Link to='/profile/'>{profile.user.username}</Link>;
   const vocab = profile.vocab;
@@ -18,8 +18,8 @@ export default function Sidebar() {
 
   return (
     <>
-      <div className='w-fixed lg:w-1/3 sm:w-full flex-shrink flex-grow-0 px-42 border-l-2 py-6 '>
-        <div className='flex sm:flex-col px-2'>
+      <div className='w-fixed w-1/4 flex-shrink flex-grow-0 px-42 border-l-2 py-6'>
+        <div className='flex md:flex-col px-2'>
           <div className='border-b-2 mb-3 w-full'>
                 <h2>Community Activity</h2>
                 <p >TODO:</p>

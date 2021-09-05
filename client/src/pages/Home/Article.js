@@ -30,21 +30,15 @@ export default class App extends Component {
     this.jQuerycode();
   }
 
-  func
-
   render() {
     return (
       <div className='article h-3/6 py-4 '>
         <main role='main' className='w-full flex-grow px-3'>
-          <h2 className='hero'>Article of the Day</h2>
           <button
-            className='mx-2 text-black hover:bg-highlight underline bg-white flex items-center p-1'>
-            Change Font Size
-          </button>
-          <button
-            className='mx-2 text-black hover:bg-highlight underline bg-white flex items-center p-1'>
+            className='mx-2 text-black underline hover:border hover:border-black bg-white flex items-center p-1'>
             Add to Favourites
           </button>
+          <h2 className='hero'>Article of the Day</h2>
           <p id='text' className="text-lg">
             Der Kreuzbau ist ein Typen­bau für Schul­gebäude in Ham­burg.
             Zwischen 1957 und 1963 wurden dort an gut 60 Stand­orten
@@ -64,7 +58,7 @@ export default class App extends Component {
             einige sind Teil eines denk­mal­geschütz­ten Ensembles."
           </p>
           <div className='my-5 grid place-items-center'>
-            <button className='btn--primary btn'>Add to Vocab ➢</button>
+            <button className='mx-2 text-white border border-black bg-black hover:text-black hover:bg-white flex items-center p-1'>Add to Vocab ➢</button>
           </div>
         </main>
       </div>
