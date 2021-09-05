@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { withRouter } from 'react-router';
 
 import Navbar from '../../partials/Navbar';

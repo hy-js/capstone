@@ -1,25 +1,26 @@
 import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams, Redirect } from 'react-router-dom';
 import useFetch from '../../components/Hooks/useFetch';
-import ProfileForm from './ProfileForm';
+import ProfileForm from '../Profile/ProfileForm';
 import AuthContext from '../../context/AuthContext';
+import Community from './Community';
 
-export default function ProfileDetails(props) {
+export default function ProfileDetails() {
+  const { id } = useParams();
   const { signedin } = useContext(AuthContext);
-
-
-  console.log(useLocation)
 
   const {
     data,
     loading,
     error
-  } = useFetch('http://localhost:5000/profile/');
+  } = useFetch('http://localhost:5000/profile/user/' + id);
 
   if (loading) return <h1>LOADING...</h1>;
   if (error) console.log(error);
-  if (!data) return <ProfileForm />
+  if (!data) return <ProfileForm />;
+
+
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -37,6 +38,7 @@ export default function ProfileDetails(props) {
     // vocab: profile.vocab,
   };
 
+
   return (
     <>
       <section>
@@ -46,7 +48,7 @@ export default function ProfileDetails(props) {
               <div className='my-2 px-2 w-full overflow-hidden card dark:border-gray-400'>
                 <p className='text-xs'> Joined:{me.joined}</p>
                 <p className='text-xs'> Last active:{me.active}</p>
-                <h2 className='logo '>{me.username}</h2>
+                <h2 className='hero '>{me.username}</h2>
                 <p>Native Language: {me.nativeLanguage}</p>
                 <p>Target Language: {me.targetLanguage}</p>
                 <hr />
@@ -55,17 +57,13 @@ export default function ProfileDetails(props) {
                 <p>{me.vocab}</p>
                 <ul className='items-center my-5'>
                     <li>
-                      <Link
-                        to="/profile/edit"
+                      <button
+                        // onClick={}
                         className='text-white border border-black bg-black hover:text-black hover:bg-white flex items-center p-1'>
-                        Edit Profile
-                      </Link>
+                        Follow
+                      </button>
                     </li>
                   </ul>
-              </div>
-
-              <div className='mt-2 px-2 w-full overflow-hidden card dark:border-gray-400'>
-                <h2 className='hero'>Friends:</h2>
               </div>
             </div>
             <div className='card dark:border-gray-400'>

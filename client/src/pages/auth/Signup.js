@@ -32,7 +32,7 @@ const Signup = () => {
       withCredentials: true
     })
     await getsignedin();
-    history.push("/profile");
+    history.push("/profile/edit");
     } catch (err) {
       console.error(err);
     }

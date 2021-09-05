@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Vocab from '../components/Vocab/Vocab';
 import Header from './Header';
 import useFetch from '../components/Hooks/useFetch';
+import AuthContext from '../context/AuthContext';
 
 export default function Sidebar() {
-  const { data: profile, loading, error } = useFetch('http://localhost:5000/profile/me');
+  const { signedin } = useContext(AuthContext);
+
+  const { data: profile, loading, error } = useFetch('http://localhost:5000/profile/');
 
   if(error) console.log(error)
   if (!profile) return <h1>Sidebar</h1>
@@ -24,7 +27,7 @@ export default function Sidebar() {
                 <h2>Community Activity</h2>
                 <p >TODO:</p>
                 <h2>Your Vocablist</h2>
-                <p >{me} knows {count} words</p>
+                <p >You know {count} words</p>
           </div>
         </div>
       </div>
