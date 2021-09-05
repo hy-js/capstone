@@ -1,7 +1,7 @@
 {
   "sampleData": "true",
   "en": {
-    "source": "61322a5981925707eebcd40d",
+    "source": "https://en.wikipedia.org/wiki/Second-language_acquisition",
     "paragraphs": {
       "0" : "Second-language acquisition (SLA), sometimes called second-language learning — otherwise referred to as L2 (language 2) acquisition, is the process by which people learn a second language. Second-language acquisition is also the scientific discipline devoted to studying that process. The field of second-language acquisition is a sub-discipline of applied linguistics but also receives research attention from a variety of other disciplines, such as psychology and education.",
       "1" : "A central theme in SLA research is that of interlanguage: the idea that the language that learners use is not simply the result of differences between the languages that they already know and the language that they are learning, but a complete language system in its own right, with its own systematic rules. This interlanguage gradually develops as learners are exposed to the targeted language. The order in which learners acquire features of their new language stays remarkably constant, even for learners with different native languages and regardless of whether they have had language instruction. However, languages that learners already know can have a significant influence on the process of learning a new one. This influence is known as language transfer."
@@ -22,7 +22,7 @@
       "1": "Un tema central en la investigación de la ASL es el interlenguaje, la idea de que el lenguaje que usan los estudiantes no es simplemente el resultado de las diferencias entre los idiomas que ellos ya dominan y el idioma que están aprendiendo, sino que es un sistema de lenguaje completo en su propio derecho, con sus propias reglas sistemáticas. Este interlenguaje se desarrolla gradualmente a medida que los alumnos se ven expuestos al idioma específico. El orden en que los estudiantes adquieren las características de su nuevo idioma se mantiene notablemente constante, incluso para los estudiantes con diferentes idiomas nativos, sin importar si se ha recibido instrucción en ese idioma. Sin embargo, los idiomas que los alumnos ya conocen pueden tener una influencia significativa en el proceso de aprendizaje de uno nuevo. Esta influencia se le conoce como transferencia de idioma."
     }
   },
-  "es": {
+  "fr": {
     "source": "https://fr.wikipedia.org/wiki/Acquisition_des_langues_%C3%A9trang%C3%A8res",
     "paragraphs": {
       "0": "L’acquisition des langues étrangères est une science humaine appliquée qui réunit des aspects théoriques de la psychologie et de la linguistique. L'objet de cette discipline est, l'étude des facteurs influençant l'acquisition d'une langue seconde ou langue étrangère ; ces différents facteurs étant linguistiques, cognitifs et socio-psychologiques.",
