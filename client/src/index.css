@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Jacques Shadow';
+  src: local('Jacques Shadow'),
+    url(./fonts/JacquesFrancoisShadow-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Jacques ';
+  src: local('Jacques'),
+    url(./fonts/JacquesFrancois-Regular.ttf) format('truetype');
+}
+
+body {
+  font-family: 'Lato', serif;
+  color: #444444;
+}
+
+.logo {
+  font-family: 'Jacques Shadow', serif;
+  font-size: 2.5rem;
+}
+.hero {
+  font-family: 'Jacques ', serif;
+  font-size: 2.5rem;
+}
+
+p {
+  font-size: 1rem;
+}
+p span {
+  background: none;
+}
+p span:hover {
+  background: rgba(255, 242, 51, 0.3);
+  cursor: pointer;
+}
+
+/* card */
+.card {
+  padding: 20px;
+  padding-bottom: 40px;
+  border: 1px solid black;
+  margin: 5px 0;
+}
+
+/* .card:last-child {
+   border-bottom: none;
+   padding-bottom: 10px;
+ } */
+
+.card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.card__title {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.card__row {
+  margin-top: 10px;
+}
+
+.card__label {
+  margin-right: 5px;
+}
+
+.card__value {
+  font-weight: 300;
+}
+
+.card__value--indented {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.card__instructions {
+  white-space: pre-wrap;
+}
+
+/* Buttons */
+.btn {
+  background: none;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  font-size: inherit;
+  border-radius: 5px;
+  padding: 5px 20px;
+  cursor: pointer;
+}
+
+.btn--primary {
+  color: black;
+  border: 1px solid black;
+}
+
+.btn--primary:hover {
+  color: orange;
+  border: 1px solid orange;
+}
+
+.btn--danger {
+  color: black;
+  border: 1px solid black;
+}
+
+.btn--danger:hover {
+  color: hsl(0, 100%, 50%);
+  border: 1px solid hsl(0, 100%, 50%);
+}
+
+body {
+  scroll-snap-type: y proximity;
+  /* Reserve space for header plus some extra space for sneak peeking. */
+  scroll-padding-top: 15vh;
+  overflow-y: scroll;
+}
+section {
+  /* Snap align start. */
+  scroll-snap-align: start;
+}
+header {
+  position: fixed;
+  height: 10vh;
+}
