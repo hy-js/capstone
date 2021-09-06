@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function RecipeIngredientEdit(props) {
+export default function ParagraphContextEdit(props) {
   const {
     ingredient,
     handleIngredientChange,

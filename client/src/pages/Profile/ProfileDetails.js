@@ -5,10 +5,13 @@ import ProfileForm from './ProfileForm';
 
 export default function ProfileDetails(props) {
   const { data, loading, error } = useFetch('http://localhost:5000/profile/');
+  const { data: vocabList} = useFetch('http://localhost:5000/vocab/');
 
-  if (loading) return <h1>LOADING...</h1>;
+  if (vocabList) vocabList.sort((a, b) => a.word.localeCompare(b.word))
+
+  if (loading) return <h1>...</h1>;
   if (error) console.log(error);
-  if (!data) return <ProfileForm />;
+  if (!data || !vocabList) return <ProfileForm />;
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -57,7 +60,11 @@ export default function ProfileDetails(props) {
             </div>
             <div className='card dark:border-gray-400'>
               <h2 className='hero'>Card Collection:</h2>
-              <p>1</p>
+              <ul>
+              {vocabList.map((wordlist) => (
+                <li>{wordlist.word}</li>
+              ))}
+              </ul>
             </div>
           </div>
         </div>

@@ -30,10 +30,10 @@ body {
 p {
   font-size: 1rem;
 }
-p span {
+span {
   background: none;
 }
-p span:hover {
+span:hover {
   background: rgba(255, 242, 51, 0.3);
   cursor: pointer;
 }

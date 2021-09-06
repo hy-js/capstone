@@ -5,12 +5,11 @@ const Profile = require('../../models/profileModel');
 const User = require('../../models/userModel');
 const Vocab = require('../../models/vocabModel');
 
-router.get('/', async (req, res) => {
+// Get all profiles
+router.get('/user/all', async (req, res) => {
   try {
     const profiles = await Profile.find().populate('user', [
-      'username',
-      'avatar'
-    ]);
+      'username', 'createdOn']);
     res.json(profiles);
   } catch (err) {
     console.error(err.message);
@@ -18,11 +17,33 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/me', auth, async (req, res) => {
+// Get particular user's profile by id
+router.get('/user/:id', async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.params.id }).populate(
+      'user',
+      ['username', 'createdOn']
+    );
+
+    if (!profile) return res.status(400).json({ msg: 'Profile not found' });
+
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    // if incorrect object
+    if (err.kind == 'ObjectId') {
+      return res.status(400).json({ msg: 'Profile not found' });
+    }
+    res.status(500).send('Server Error');
+  }
+});
+
+// get my profile
+router.get('/', auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.user.id
-    }).populate('user', ['username', 'createdAt']);
+    }).populate('user', ['username', 'createdOn']);
 
     if (!profile) {
       return res.status(400).json({ msg: 'There is no profile for this user' });
@@ -35,71 +56,55 @@ router.get('/me', auth, async (req, res) => {
   }
 });
 
-router.get('/user/:user_id', async (req, res) => {
+// Delete profile and user
+router.delete('/', auth, async (req, res) => {
   try {
-    const profile = await Profile.findOne({
-      user: req.params.user_id
-    }).populate('user', ['name', 'avatar']);
+    //  TODO: remove users posts
+    // remove profile
+      await Profile.findOneAndRemove({user: req.user.id});
+      // remove user
+      await User.findOneAndRemove({_id: req.user.id});
 
-    if (!profile) return res.status(400).json({ msg: 'Profile not found' });
-
-    res.json(profile);
+    res.json({msg: 'User deleted'});
   } catch (err) {
     console.error(err.message);
-
-    if (err.kind == 'ObjectId') {
-      return res.status(400).json({ msg: 'Profile not found' });
-    }
-
     res.status(500).send('Server Error');
   }
 });
 
+// Create Profile
 router.post('/', auth, async (req, res) => {
-    const {
-      nativeLanguage,
-      targetLanguages,
-      favTopics,
-      bio,
-      lastActive,
-      vocab,
-    } = req.body;
+  const { nativeLanguage, targetLanguage, bio, vocab } =
+    req.body;
 
-    const profileFields = {};
+  const profileFields = {};
 
-    profileFields.user = req.user.id;
+  profileFields.user = req.user.id;
 
-    if (nativeLanguage) profileFields.nativeLanguage = nativeLanguage;
-    if (targetLanguages) {
-      profileFields.targetLanguages = targetLanguages.split(',').map((targetLanguage) => targetLanguage.trim());
+  if (nativeLanguage) profileFields.nativeLanguage = nativeLanguage;
+  if (targetLanguage) profileFields.targetLanguage = targetLanguage;
+  if (bio) profileFields.bio = bio;
+  if (vocab) profileFields.vocab = vocab;
+
+  try {
+    let profile = await Profile.findOne({ user: req.user.id });
+    if (profile) {
+      profile = await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: profileFields },
+        { new: true }
+      );
+      return res.json(profile);
     }
-    if (favTopics) {
-      profileFields.favTopics = favTopics.split(',').map((favTopic) => favTopic.trim());
-    }
-    if (bio) profileFields.bio = bio;
-    if (lastActive) profileFields.lastActive = lastActive;
-    if (vocab) profileFields.vocab = vocab;
 
-    try {
-      let profile = await Profile.findOne({ user: req.user.id });
-      if (profile) {
-        profile = await Profile.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: profileFields },
-          { new: true }
-        );
-        return res.json(profile);
-      }
+    profile = new Profile(profileFields);
 
-      profile = new Profile(profileFields);
-
-      await profile.save();
-      res.json(profile);
-    } catch (err) {
-      console.log(err.message);
-      res.status(500).send('Server Error');
-    }
+    await profile.save();
+    res.json(profile);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
   }
-);
+});
 
 module.exports = router;

@@ -1,11 +1,9 @@
 const mongoose = require("mongoose")
-const { Schema } = require("mongoose")
 
-const vocabSchema = new Schema(
-  {
+const vocabSchema = new mongoose.Schema({
     user: {
-      type: Schema.Types.ObjectId,
-      ref: "user",
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
     },
     word: { type: String, required: true },
     language: { type: String },

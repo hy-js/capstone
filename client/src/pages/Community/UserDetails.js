@@ -12,9 +12,15 @@ export default function ProfileDetails() {
     error
   } = useFetch('http://localhost:5000/profile/user/' + id);
 
+  const {
+    data: vocabList
+  } = useFetch('http://localhost:5000/vocab/user/' + id)
+  ;
+  if (vocabList) vocabList.sort((a, b) => a.word.localeCompare(b.word))
+
   if (loading) return <h1>LOADING...</h1>;
   if (error) console.log(error);
-  if (!data) return <ProfileForm />;
+  if (!data || !vocabList) return <ProfileForm />;
 
 
 
@@ -64,7 +70,11 @@ export default function ProfileDetails() {
             </div>
             <div className='card dark:border-gray-400'>
               <h2 className='hero'>Card Collection:</h2>
-              <p>1</p>
+              <ul>
+              {vocabList?.map((wordlist) => (
+                <li>{wordlist.word}</li>
+              ))}
+              </ul>
             </div>
           </div>
         </div>

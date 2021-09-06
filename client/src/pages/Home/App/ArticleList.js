@@ -1,27 +1,17 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Article from './Article'
-import { ArticleContext } from './App'
 
-export default function ArticleList({ recipes }) {
-  const { handleArticleAdd } = useContext(ArticleContext)
+export default function ArticleList({ articles }) {
 
   return (
-    <div className="recipe-list">
+    <div className="article-list">
       <div>
-        {recipes.map(recipe => {
+        {articles.map(article => {
           return (
-            <Article key={recipe.id} {...recipe} />
+            <Article key={article.id} {...article} />
           )
         })}
       </div>
-      {/* <div className="recipe-list__add-recipe-btn-container">
-        <button
-          className="btn btn--primary"
-          onClick={handleRecipeAdd}
-        >
-          Add Recipe
-        </button>
-      </div> */}
     </div>
   )
 }

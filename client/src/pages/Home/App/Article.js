@@ -4,7 +4,7 @@ import { ArticleContext } from './App';
 import $ from 'jquery';
 
 export default function Article(props) {
-  const { handleArticleDelete, handleArticleSelect,  handleVocabSelect } =
+  const { handleArticleSelect,  handleVocabSelect } =
     useContext(ArticleContext);
   const { id, name, language, source, paragraphs } = props;
 
@@ -30,7 +30,7 @@ export default function Article(props) {
     if ($(this).hasClass('selected')) {
       $(this).removeClass('bg-highlight');
       $(this).removeClass('selected');
-      let word = (this.innerHTML).replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ").toLowerCase();
+      let word = (this.innerHTML).replace(/([\u0000-\u0026\u0028-\u0040\u005B-\u0060\u007B-\u00BF\u02B0-\u036F\u00D7\u00F7\u2000-\u2BFF])+/g, "").toLowerCase();
       const index = newWords.indexOf(word);
       if (index > -1) {
         newWords.splice(index, 1);
@@ -39,7 +39,7 @@ export default function Article(props) {
     }
     $(this).addClass('bg-highlight');
     $(this).addClass('selected');
-    let word = (this.innerHTML).replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ").toLowerCase()
+    let word = (this.innerHTML).replace(/([\u0000-\u0026\u0028-\u0040\u005B-\u0060\u007B-\u00BF\u02B0-\u036F\u00D7\u00F7\u2000-\u2BFF])+/g, "").toLowerCase()
     newWords.push(word);
   });
 
@@ -74,12 +74,6 @@ export default function Article(props) {
             >
             Add to Vocab ▼
           </button>
-          {/* <button
-            className="btn btn--danger"
-            onClick={() => handleArticleDelete(id)}
-          >
-            Delete
-          </button> */}
         </div>
       </div>
     </div>

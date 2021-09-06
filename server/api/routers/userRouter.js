@@ -6,13 +6,9 @@ const jwt = require('jsonwebtoken');
 const auth = require('../../middleware/auth');
 
 // TODO: change to api toutes
-// @route   Get auth
-// @desc  Test route
-// @acess   private
 // Check if logged in
 router.get('/', auth, async (req, res) => {
   try {
-    console.log(req.user.id)
     const user = await User.findById(req.user.id).select('-passwordHash');
     res.json(user);
   } catch (err) {
@@ -24,7 +20,7 @@ router.get('/', auth, async (req, res) => {
 // REGISTRATION: Sign Up
 router.post('/', async (req, res) => {
   try {
-    const { username, password, passwordConfirm,  avatar } = req.body;
+    const { username, password, passwordConfirm } = req.body;
 
     // validation
     if (!username || !password || !passwordConfirm )
@@ -57,7 +53,7 @@ router.post('/', async (req, res) => {
     const newUser = new User({
       username: cleanedUsername,
       passwordHash: hash,
-      createdAt: new Date().toISOString()
+      createdOn: new Date().toISOString()
     });
     const savedUser = await newUser.save();
 
@@ -126,7 +122,6 @@ router.post('/signin', async (req, res) => {
         { expiresIn: 360000 },
       );
     // send the token in a HTTP-only cookie
-    console.log(token)
     res
       .cookie('token', token, {
         httpOnly: true,
@@ -167,8 +162,8 @@ router.get("/signedin", (req, res) => {
   }
 });
 
-router.get('/:id', (req, res) => {
-  User.findById(req.params.id)
+router.get('/:id', auth, (req, res) => {
+  User.findById(req.params.id).select('-passwordHash')
   .then(result => res.json(result))
   .catch(err => {
     console.log(err)

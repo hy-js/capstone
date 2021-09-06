@@ -3,16 +3,22 @@ import useFetch from '../../components/Hooks/useFetch';
 import { Link } from 'react-router-dom';
 
 const CommunityDetails = () => {
+  const { data:allCards } = useFetch(
+    'http://localhost:5000/vocab/all'
+  );
   const { data, loading, error } = useFetch(
     'http://localhost:5000/profile/user/all'
   );
 
+  if (allCards) {
+    allCards.sort((a, b) => a.word.localeCompare(b.word))
+  }
+
   if (loading) return <h1>...</h1>;
   if (error) console.log(error);
-  if (!data) return null;
+  if (!data ) return null;
 
   function Profile(props) {
-
     return (
       <div className='card dark:border-gray-400'>
         <ul>
@@ -37,6 +43,11 @@ const CommunityDetails = () => {
               </div>
               <div className='mt-2 px-2 w-full overflow-hidden card dark:border-gray-400'>
                 <h2 className='hero'>All Cards:</h2>
+                <ul>
+                  {allCards?.map((wordlist) => (
+                    <li>{wordlist.word}</li>
+                  ))}
+                </ul>
               </div>
             </div>
             <div className='card dark:border-gray-400'>

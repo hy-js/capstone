@@ -8,20 +8,11 @@ const profileSchema = new mongoose.Schema({
   nativeLanguage: {
     type: String,
   },
-  targetLanguages: {
-    type: [String],
-  },
-  favTopics: {
-    type: [String],
+  targetLanguage: {
+    type: String,
   },
   bio: {
     type: String,
-  },
-  joined: {
-    type: Date,
-  },
-  lastActive: {
-    type: Date,
   },
   vocab: [
     {
@@ -39,7 +30,7 @@ const profileSchema = new mongoose.Schema({
       },
     },
   ],
-  date: {
+  lastUpdated: {
     type: Date,
     default: Date.now,
   },
