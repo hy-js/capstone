@@ -1,8 +1,4 @@
-import axios from 'axios';
-import React, { useContext, useState } from 'react';
-import { useHistory, a } from 'react-router-dom';
-import AuthContext from '../../context/AuthContext';
-import Header from '../../partials/Header';
+import React from 'react';
 
 export default function ContactDetails() {
   return (

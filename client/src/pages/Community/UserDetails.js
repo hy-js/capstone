@@ -1,14 +1,10 @@
-import axios from 'axios';
-import React, { useState, useEffect, useContext } from 'react';
-import { Link, useLocation, useParams, Redirect } from 'react-router-dom';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import useFetch from '../../components/Hooks/useFetch';
 import ProfileForm from '../Profile/ProfileForm';
-import AuthContext from '../../context/AuthContext';
-import Community from './Community';
 
 export default function ProfileDetails() {
   const { id } = useParams();
-  const { signedin } = useContext(AuthContext);
 
   const {
     data,

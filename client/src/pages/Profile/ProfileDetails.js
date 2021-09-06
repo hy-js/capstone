@@ -1,31 +1,18 @@
-import axios from 'axios';
-import React, { useState, useEffect, useContext } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import useFetch from '../../components/Hooks/useFetch';
 import ProfileForm from './ProfileForm';
-import AuthContext from '../../context/AuthContext';
 
 export default function ProfileDetails(props) {
-  const { signedin } = useContext(AuthContext);
-
-
-  console.log(useLocation)
-
-  const {
-    data,
-    loading,
-    error
-  } = useFetch('http://localhost:5000/profile/');
+  const { data, loading, error } = useFetch('http://localhost:5000/profile/');
 
   if (loading) return <h1>LOADING...</h1>;
   if (error) console.log(error);
-  if (!data) return <ProfileForm />
+  if (!data) return <ProfileForm />;
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-
-
 
   let me = {
     username: capitalizeFirstLetter(data.user.username),
@@ -54,14 +41,14 @@ export default function ProfileDetails(props) {
                 <p>{me.bio}</p>
                 <p>{me.vocab}</p>
                 <ul className='items-center my-5'>
-                    <li>
-                      <Link
-                        to="/profile/edit"
-                        className='text-white border border-black bg-black hover:text-black hover:bg-white flex items-center p-1'>
-                        Edit Profile
-                      </Link>
-                    </li>
-                  </ul>
+                  <li>
+                    <Link
+                      to='/profile/edit'
+                      className='text-white border border-black bg-black hover:text-black hover:bg-white flex items-center p-1'>
+                      Edit Profile
+                    </Link>
+                  </li>
+                </ul>
               </div>
 
               <div className='mt-2 px-2 w-full overflow-hidden card dark:border-gray-400'>

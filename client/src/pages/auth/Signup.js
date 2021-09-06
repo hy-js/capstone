@@ -3,7 +3,6 @@ import React, { useContext, useState } from "react";
 import { useHistory, Link, withRouter } from "react-router-dom";
 import AuthContext from '../../context/AuthContext';
 import Header from "../../partials/Header";
-import SignOutBtn from "./SignOutBtn";
 
 
 const Signup = () => {

@@ -9,8 +9,8 @@ const Landing = () => {
   return (
     <>
       <Header />
-      <div class='w-full flex flex-col sm:flex-row flex-wrap sm:flex-nowrap'>
-        <main role='main' class='w-full flex-grow pt-1 px-3'>
+      <div className='w-full flex flex-col sm:flex-row flex-wrap sm:flex-nowrap'>
+        <main role='main' className='w-full flex-grow pt-1 px-3'>
           <Hero />
         </main>
       </div>

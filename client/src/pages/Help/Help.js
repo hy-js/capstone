@@ -11,9 +11,10 @@ const Help = () => {
   return (
     <>
       <Header />
-      <div class='w-full flex flex-col sm:flex-row flex-wrap sm:flex-nowrap'>
+      <div className='w-full flex flex-col sm:flex-row flex-wrap sm:flex-nowrap'>
       <Navbar />
-        <main role='main' class='w-full flex-grow pt-1 px-3'>
+        <main role='main' className='w-full flex-grow pt-1 px-3'>
+        <h1 className="logo">?Help</h1>
           <How />
           <Demo />
         </main>

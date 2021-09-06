@@ -1,20 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import Vocab from '../components/Vocab/Vocab';
-import Header from './Header';
 import useFetch from '../components/Hooks/useFetch';
-import AuthContext from '../context/AuthContext';
-
 export default function Sidebar() {
-  const { signedin } = useContext(AuthContext);
 
-  const { data: profile, loading, error } = useFetch('http://localhost:5000/profile/');
+  const { data: profile, error } = useFetch('http://localhost:5000/profile/');
 
   if(error) console.log(error)
   if (!profile) return <h1>Sidebar</h1>
 
-  const me = <Link to='/profile/'>{profile.user.username}</Link>;
+  // const me = <Link to='/profile/'>{profile.user.username}</Link>;
   const vocab = profile.vocab;
   const cards = vocab.filter((x) => x.cards);
   const count = cards.length;

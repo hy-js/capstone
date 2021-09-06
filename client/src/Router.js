@@ -1,9 +1,8 @@
 import React, { useContext, useState, useMemo } from 'react';
-import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import AuthContext from './context/AuthContext';
 
 import ProtectedRoute from './partials/ProtectedRoute';
-import BlockedRoute from './partials/BlockedRoute';
 import Unauthorised from './pages/Unauthorised';
 
 

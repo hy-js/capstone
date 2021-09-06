@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import useFetch from '../../components/Hooks/useFetch';
 import DeleteProfileBtn from './DeleteProfileBtn';

@@ -1,8 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import CardApp from '../../components/Cards/CardApp';
-import DemoArticle from './DemoArticle';
 import { Link } from 'react-router-dom';
-import $ from 'jquery';
 
 import sample from './sampleTexts.json';
 import useSelect from '../../components/Hooks/useSelect';
@@ -15,17 +13,6 @@ const Demo = () => {
 
   useSelect(p[0][1])
 
-  // const selectableText = () => {
-  //   Object.values(p).forEach((val) => {
-  //     let word =val.split(/\s+/).trim()
-  //     word.join('</span> <span>');
-  //     $('#text p').html('<span>' + word + '</span>');
-  //     $('span').on('click', function () {
-  //       $(this).css('background-color', 'highlight');
-  //       $(this).addClass('selected');
-  //     });
-  //   });
-  // };
 
   return (
     <section
