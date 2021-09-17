@@ -14,6 +14,9 @@ const profileSchema = new mongoose.Schema({
   bio: {
     type: String,
   },
+  following: {
+    type: [String],
+  },
   vocab: [
     {
       count: {

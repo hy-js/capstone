@@ -7,9 +7,9 @@ module.exports = {
         colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      highlight: "rgba(255,242,51,.5)",
+      highlight: "#fbec74",
       dark: "#2b2a33",
-      light: "##d2d2d2",
+      light: "#d2d2d2",
       black: colors.black,
       white: colors.white,
       gray: colors.trueGray,

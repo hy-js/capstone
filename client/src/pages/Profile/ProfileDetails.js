@@ -7,7 +7,7 @@ export default function ProfileDetails(props) {
   const { data, loading, error } = useFetch('http://localhost:5000/profile/');
   const { data: vocabList} = useFetch('http://localhost:5000/vocab/');
 
-  if (vocabList) vocabList.sort((a, b) => a.word.localeCompare(b.word))
+  if (vocabList) vocabList.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
 
   if (loading) return <h1>...</h1>;
   if (error) console.log(error);
@@ -18,6 +18,7 @@ export default function ProfileDetails(props) {
   }
 
   let me = {
+    key:  data.user._id,
     username: capitalizeFirstLetter(data.user.username),
     joined: data.user.createdOn.substring(0, 10),
     active: data.lastUpdated.substring(0, 10),
@@ -30,7 +31,7 @@ export default function ProfileDetails(props) {
   return (
     <>
       <section>
-        <div className='mx-auto container flex justify-center h-screen '>
+        <div className='mx-auto container flex justify-center '>
           <div className='grid grid-cols-2 gap-6 mx-auto m-16'>
             <div className='flex flex-wrap mx-2 overflow-hidden'>
               <div className='my-2 px-2 w-full overflow-hidden card dark:border-gray-400'>
@@ -59,10 +60,13 @@ export default function ProfileDetails(props) {
               </div>
             </div>
             <div className='card dark:border-gray-400'>
-              <h2 className='hero'>Card Collection:</h2>
+              <h2 className='hero'>Latest Cards:</h2>
+              <h2 className='underline'>Contributed {vocabList?.length} words</h2>
               <ul>
               {vocabList.map((wordlist) => (
-                <li>{wordlist.word}</li>
+                <a href={'explore/card/' + wordlist._id}>
+                <li>{(wordlist.updatedAt).substring(5, 10)}: {wordlist.word}</li>
+                </a>
               ))}
               </ul>
             </div>

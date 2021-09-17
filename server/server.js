@@ -44,3 +44,4 @@ mongoose.connect(
 app.use("/auth", require("./api/routers/userRouter"));
 app.use("/vocab", require("./api/routers/vocabRouter"));
 app.use("/profile", require("./api/routers/profileRouter"));
+app.use("/article", require("./api/routers/articleRouter"));

@@ -1,11 +1,11 @@
 import React from 'react'
 import Paragraph from './Paragraph'
 
-export default function ParagraphList({ ingredients}) {
-  const articleParagraphs = ingredients.map(paragraph => {
+export default function ParagraphList({ paragraphs}) {
+  const articleParagraphs = paragraphs.map(paragraph => {
     return (
       <>
-      <Paragraph key={paragraph.id} {...paragraph} />
+      <Paragraph key={paragraph._id} {...paragraph} />
       <br />
       </>
     )

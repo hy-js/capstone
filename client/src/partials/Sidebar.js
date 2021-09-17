@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import useFetch from '../components/Hooks/useFetch';
 export default function Sidebar() {
   // const { data: profile, error } = useFetch('http://localhost:5000/profile/');
-  const { data, error } = useFetch('http://localhost:5000/vocab/');
+  // const { data, error } = useFetch('http://localhost:5000/vocab/');
 
-  if (error) console.log(error);
-  if (!data) return <h1>Sidebar</h1>;
+  // if (error) console.log(error);
+  // if (!data) return <h1>Sidebar</h1>;
 
   // const me = <Link to='/profile/'>{profile.user.username}</Link>;
   // const vocab = profile.vocab;
@@ -15,16 +15,21 @@ export default function Sidebar() {
 
   return (
     <>
-      <div className='w-fixed w-1/4 flex-shrink flex-grow-0 px-42 border-l-2 py-6'>
+      <div className='w-fixed w-1/5 flex-shrink flex-grow-0 px-42 border-l-2 py-6'>
         <div className='flex md:flex-col px-2'>
-          <div className='mb-3 w-full'>
-            <h2 className='hero border-b-2'>Your <br/>Vocablist</h2>
+          {/* <div className='mb-3 w-full'>
+            <Link to='/profile'>
+              <h2 className='hero border-b-2'>
+                Your <br />
+                Vocablist
+              </h2>
+            </Link>
             <ul>
               {data.map((wordlist) => (
                 <li>{wordlist.word}</li>
               ))}
             </ul>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

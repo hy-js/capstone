@@ -72,34 +72,7 @@ const Signup = () => {
               value={passwordConfirm}
             />
           </label>
-          {/* <label>
-            <p>Native Language</p>
-            <div className='inline-block'>
-              <select onChange={(e) => setNativeLanguage(e.target.value)} value={nativeLanguage} className='border hover:border-gray-500 shadow leading-tight focus:outline-none focus:shadow-outline'>
-              <option value="en">English 🇦🇺</option>
-                <option value="fr">French 🇫🇷 </option>
-                <option value="de">German 🇩🇪 </option>
-                <option value="es">Spanish 🇪🇸 </option>
-                <option value="it">Italian 🇮🇹 </option>
-                <option value="jp">Japanese 🇯🇵 </option>
-                <option value="kr">Korean 🇰🇷 </option>
-              </select>
-            </div>
-          </label>
-          <label>
-            <p>Target Language</p>
-            <div className='inline-block'>
-              <select onChange={(e) => setTargetLanguage(e.target.value)} value={targetLanguage} className='border hover:border-gray-500 shadow leading-tight focus:outline-none focus:shadow-outline'>
-                <option value="en">English 🇦🇺</option>
-                <option value="fr">French 🇫🇷 </option>
-                <option value="de">German 🇩🇪 </option>
-                <option value="es">Spanish 🇪🇸 </option>
-                <option value="it">Italian 🇮🇹 </option>
-                <option value="jp">Japanese 🇯🇵 </option>
-                <option value="kr">Korean 🇰🇷 </option>
-              </select>
-            </div>
-          </label> */}
+
           <ul className='flex justify-center items-center my-5'>
                 <li>
                   <button

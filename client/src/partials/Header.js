@@ -8,7 +8,7 @@ const Header = () => {
   const { signedin } = useContext(AuthContext);
 
   return (
-    <nav className='fixed right-0'>
+    <nav className='hidden md:inline fixed right-0 m-8 px-5'>
       {signedin === false && (
         <ul className='flex flex-grow justify-end flex-wrap items-center p-2 mx-2'>
           <li>
@@ -28,6 +28,7 @@ const Header = () => {
         </ul>
       )}
       {signedin === true && (
+        <>
         <ul className='flex flex-grow justify-end flex-wrap items-center'>
           <li>
             <div className='mx-5 text-black underline bg-white flex items-center p-1'>
@@ -42,8 +43,9 @@ const Header = () => {
             </Link>
           </li>
         </ul>
+        <Theme />
+        </>
       )}
-      <Theme />
     </nav>
   );
 };

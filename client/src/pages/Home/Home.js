@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <div className='w-full h-screen flex flex-col sm:flex-row flex-wrap sm:flex-nowrap py-4 flex-grow'>
+      <div className='w-full flex flex-col sm:flex-row flex-wrap sm:flex-nowrap py-4 flex-grow'>
         <Navbar />
         <main role='main' className='w-full flex-grow pt-1 px-3'>
         <h1 className="logo">⌂Home</h1>

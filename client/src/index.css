@@ -15,7 +15,6 @@
 
 body {
   font-family: 'Lato', serif;
-  color: #444444;
 }
 
 .logo {
@@ -129,4 +128,8 @@ section {
 header {
   position: fixed;
   height: 10vh;
+}
+
+.in-vocab{
+  text-decoration: underline;
 }

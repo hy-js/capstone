@@ -11,6 +11,8 @@ import Help from './pages/Help/Help';
 import Home from './pages/Home/Home';
 import Community from './pages/Community/Community';
 import User from './pages/Community/User';
+import Card from './pages/Explore/Card'
+import Article from './pages/Explore/Article'
 import Explore from './pages/Explore/Explore';
 import Profile from './pages/Profile/Profile';
 import ProfileForm from './pages/Profile/ProfileForm';
@@ -58,10 +60,19 @@ function Router() {
           isAuth={signedin}
           exact
         />
-        <ProtectedRoute
+        <Route
+          path='/explore/card/:id'
+          component={Card}
+          exact
+        />
+        <Route
+          path='/explore/article/:id'
+          component={Article}
+          exact
+        />
+        <Route
           path='/community/user/:id'
           component={User}
-          isAuth={signedin}
           exact
         />
         <ProtectedRoute
@@ -76,7 +87,7 @@ function Router() {
           isAuth={signedin}
           exact
         />
-        <Route component={Unauthorised} />
+        {/* <Route component={Unauthorised} /> */}
       </Switch>
     </BrowserRouter>
   );

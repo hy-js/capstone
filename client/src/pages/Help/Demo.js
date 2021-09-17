@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import CardApp from '../../components/Cards/CardApp';
 import { Link } from 'react-router-dom';
+import $ from 'jquery';
+import useFetch from '../../components/Hooks/useFetch'
 
 import sample from './sampleTexts.json';
-import useSelect from '../../components/Hooks/useSelect';
 
 const Demo = () => {
   const [language, setLanguage] = useState('en');
@@ -11,7 +12,71 @@ const Demo = () => {
   let article = sample[language];
   let p = article.paragraphs;
 
-  useSelect(p[0][1])
+  let newWords = [];
+  var words = $('#text').text().split(/\s+/);
+  var text = words.join('</span> <span>');
+  $('#text p')
+    .first()
+    .html('<span>' + text + '</span>');
+  $('span').on('click', function () {
+    if ($(this).hasClass('in-vocab')) return;
+    if ($(this).hasClass('selected')) {
+      $(this).removeClass('bg-highlight');
+      $(this).removeClass('selected');
+      let word = this.innerHTML
+        .replace(
+          /([\u0000-\u0026\u0028-\u0040\u005B-\u0060\u007B-\u00BF\u02B0-\u036F\u00D7\u00F7\u2000-\u2BFF])+/g,
+          ''
+        )
+        .toLowerCase();
+      const index = newWords.indexOf(word);
+      if (index > -1) {
+        newWords.splice(index, 1);
+      }
+      return;
+    }
+    $(this).addClass('bg-highlight');
+    $(this).addClass('selected');
+    let word = this.innerHTML
+      .replace(
+        /([\u0000-\u0026\u0028-\u0040\u005B-\u0060\u007B-\u00BF\u02B0-\u036F\u00D7\u00F7\u2000-\u2BFF])+/g,
+        ''
+      )
+      .toLowerCase();
+    newWords.push(word);
+  });
+
+  // Highlight words already in vocab
+  const { data } = useFetch('http://localhost:5000/vocab/all');
+  function showAllVocab() {
+    if (data) {
+      for (let i = 0; i < data.length; i++) {
+        let searchValue = data[i].word;
+        let searchId = data[i]._id;
+        $('span').each(function () {
+          if ($(this).html().indexOf(searchValue) > -1) {
+            let link = '/explore/card/' + searchId;
+            $(this).addClass('in-vocab').wrap(`<a href=${link}></a>`);
+          }
+        });
+      }
+    }
+  }
+  function showTranslation() {
+    if (data) {
+      for (let i = 0; i < data.length; i++) {
+        let searchValue = data[i].word;
+        let translation = data[i].translation;
+        $('span').each(function () {
+          if ($(this).html().indexOf(searchValue) > -1) {
+            if (translation) {
+              $(this).addClass('bg-highlight').html(translation);
+            }
+          }
+        });
+      }
+    }
+  }
 
 
   return (
@@ -43,7 +108,6 @@ const Demo = () => {
             <div className='w-full flex-grow pt-1 px-3'>
               <div id='text'>
                 <p>{p[0]}</p>
-                <p>{p[1]}</p>
                 <a href={article.source} className='text-xs mx-2 underline'>
                   Source
                 </a>

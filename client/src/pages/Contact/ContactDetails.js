@@ -5,7 +5,6 @@ export default function ContactDetails() {
     <div className='my-2 px-2 w-full overflow-hidden card dark:border-gray-400'>
       <h2 className='hero'>Contact</h2>
       <div className='h-max text-black p-10 border border-black dark:text-white dark:border-white'>
-        <h2 className='hero'>Form</h2>
         <form>
           <label>
             <p>Username</p>
@@ -39,12 +38,13 @@ export default function ContactDetails() {
         </form>
       </div>
       <div className='flex flex-col'>
-        <a href='https://github.com/hy-js'>My Profile</a>
-        <a href='https://github.com/hy-js'>Ko Fi</a>
+      <h2 className='hero'>Find me elsewhere</h2>
+        <a href='http://localhost:3000/community/user/61348b240ef7c01510a26ed9'>My Profile</a>
         <a href='https://github.com/hy-js'>Github</a>
-        <a href='https://github.com/hy-js'>Twitter</a>
-        <a href='https://github.com/hy-js'>Website</a>
-        <a href='https://github.com/hy-js'>Linked In</a>F
+        {/* <a href='https://github.com/hy-js'>Ko Fi</a> */}
+        <a href='https://twitter.com/hyjs_'>Twitter</a>
+        {/* <a href='https://github.com/hy-js'>Website</a> */}
+        {/* <a href='https://github.com/hy-js'>Linked In</a> */}
       </div>
     </div>
   );

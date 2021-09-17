@@ -49,7 +49,7 @@ export default function ProfileForm() {
   return (
     <>
       <section>
-        <div className='mx-auto container flex justify-center h-screen '>
+        <div className='mx-auto container flex justify-center '>
           <div className='grid grid-cols-2 gap-6 mx-auto m-16'>
             <div className='flex flex-wrap mx-2 overflow-hidden'>
               <div className='my-2 px-2 w-full overflow-hidden card dark:border-gray-400'>

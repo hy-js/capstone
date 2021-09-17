@@ -8,7 +8,7 @@ export default function ArticleList({ articles }) {
       <div>
         {articles.map(article => {
           return (
-            <Article key={article.id} {...article} />
+            <Article key={article._id} {...article} />
           )
         })}
       </div>

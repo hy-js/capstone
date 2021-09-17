@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const User = require('../../models/userModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
     const { username, password, passwordConfirm } = req.body;
 
     // validation
-    if (!username || !password || !passwordConfirm )
+    if (!username || !password || !passwordConfirm)
       return res
         .status(400)
         .json({ errorMessage: 'Please enter all required fields.' });
@@ -59,23 +59,21 @@ router.post('/', async (req, res) => {
 
     const payload = {
       user: {
-        id: savedUser._id,
-      },
+        id: savedUser._id
+      }
     };
 
     //  Confirm Token
-    const token = jwt.sign(
-      payload,
-      process.env.JWT_SECRET,
-      { expiresIn: 360000 },
-    );
-    console.log(token)
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: 360000
+    });
+    console.log(token);
     // HTTP-only cookie (in header) to avoid XXS local storage hack
     res
       .cookie('token', token, {
         httpOnly: true,
         secure: true,
-        sameSite: "none",
+        sameSite: 'none'
       })
       .send();
     // Catch errors
@@ -109,18 +107,16 @@ router.post('/signin', async (req, res) => {
       //  Unauthorized correct
       return res.status(401).json({ errorMessage: 'Incorrect credentials.' });
 
-      const payload = {
-        user: {
-          id: existingUser._id,
-        },
-      };
+    const payload = {
+      user: {
+        id: existingUser._id
+      }
+    };
 
-      //  Confirm Token
-      const token = jwt.sign(
-        payload,
-        process.env.JWT_SECRET,
-        { expiresIn: 360000 },
-      );
+    //  Confirm Token
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: 360000
+    });
     // send the token in a HTTP-only cookie
     res
       .cookie('token', token, {
@@ -129,7 +125,6 @@ router.post('/signin', async (req, res) => {
         sameSite: 'none'
       })
       .send();
-
   } catch (err) {
     console.log(err);
     res.status(500).send;
@@ -137,19 +132,19 @@ router.post('/signin', async (req, res) => {
 });
 
 // SIGNOUT : clearcookie / set to empty to invaldiate
-router.get("/signout", (req, res) => {
-   res
-     .cookie("token", "", {
-       httpOnly: true,
-       expires: new Date(0),
+router.get('/signout', (req, res) => {
+  res
+    .cookie('token', '', {
+      httpOnly: true,
+      expires: new Date(0),
       //  secure: true,
-       sameSite: "none",
-     })
-     .send();
- });
+      sameSite: 'none'
+    })
+    .send();
+});
 
 // SIGNEDIN: check if logged in
-router.get("/signedin", (req, res) => {
+router.get('/signedin', (req, res) => {
   try {
     const token = req.cookies.token;
     if (!token) return res.json(false);
@@ -163,15 +158,16 @@ router.get("/signedin", (req, res) => {
 });
 
 router.get('/:id', auth, (req, res) => {
-  User.findById(req.params.id).select('-passwordHash')
-  .then(result => res.json(result))
-  .catch(err => {
-    console.log(err)
-    res.status(400).json({
-      "message": "Error getting user from the database",
-      err
-    })
-  })
-})
+  User.findById(req.params.id)
+    .select('-passwordHash')
+    .then((result) => res.json(result))
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json({
+        message: 'Error getting user from the database',
+        err
+      });
+    });
+});
 
 module.exports = router;

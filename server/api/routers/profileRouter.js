@@ -9,7 +9,9 @@ const Vocab = require('../../models/vocabModel');
 router.get('/user/all', async (req, res) => {
   try {
     const profiles = await Profile.find().populate('user', [
-      'username', 'createdOn']);
+      'username',
+      'createdOn'
+    ]);
     res.json(profiles);
   } catch (err) {
     console.error(err.message);
@@ -61,11 +63,11 @@ router.delete('/', auth, async (req, res) => {
   try {
     //  TODO: remove users posts
     // remove profile
-      await Profile.findOneAndRemove({user: req.user.id});
-      // remove user
-      await User.findOneAndRemove({_id: req.user.id});
+    await Profile.findOneAndRemove({ user: req.user.id });
+    // remove user
+    await User.findOneAndRemove({ _id: req.user.id });
 
-    res.json({msg: 'User deleted'});
+    res.json({ msg: 'User deleted' });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -74,13 +76,12 @@ router.delete('/', auth, async (req, res) => {
 
 // Create Profile
 router.post('/', auth, async (req, res) => {
-  const { nativeLanguage, targetLanguage, bio, vocab } =
-    req.body;
+  const { following, nativeLanguage, targetLanguage, bio, vocab } = req.body;
 
   const profileFields = {};
-
   profileFields.user = req.user.id;
 
+  if (following) profileFields.following.push({id});
   if (nativeLanguage) profileFields.nativeLanguage = nativeLanguage;
   if (targetLanguage) profileFields.targetLanguage = targetLanguage;
   if (bio) profileFields.bio = bio;
